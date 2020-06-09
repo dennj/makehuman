@@ -85,6 +85,16 @@ class ViewerTaskView(gui3d.TaskView):
         self.image.setImage(path)
         log.message('Image "%s" loaded in image viewer.', path)
 
+    def save_image(self, filename):
+        if not self.path:
+            if not os.path.exists(mh.getPath('render')):
+                os.makedirs(mh.getPath('render'))
+            self.path = mh.getPath('render')
+
+        path = mh.getPath('render')
+        filename = os.path.join(path, filename)
+        self.image.save(filename, iformat='PNG')
+
 def load(app):
     category = app.getCategory('Rendering')
     taskview = ViewerTaskView(category)

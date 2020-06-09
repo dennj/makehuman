@@ -51,7 +51,7 @@ from getpath import getPath, getSysDataPath
 import collections
 
 NOTICE = 25
-MESSAGE = logging.INFO
+MESSAGE = logging.DEBUG
 
 LEVEL_TO_STR = { DEBUG: "debug",
                  INFO: "info",

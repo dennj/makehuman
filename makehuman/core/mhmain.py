@@ -60,6 +60,7 @@ import contextlib
 
 from mhversion import MHVersion
 
+
 @contextlib.contextmanager
 def outFile(path):
     import io
@@ -76,6 +77,7 @@ def outFile(path):
             os.remove(tmppath)
         log.error('unable to save file %s', path, exc_info=True)
 
+
 @contextlib.contextmanager
 def inFile(path):
     import io
@@ -88,6 +90,7 @@ def inFile(path):
             yield f
     except:
         log.error('Failed to load file %s', path, exc_info=True)
+
 
 class PluginCheckBox(gui.CheckBox):
 
@@ -108,6 +111,7 @@ class PluginCheckBox(gui.CheckBox):
 
         gui3d.app.saveSettings()
 
+
 class PluginsTaskView(gui3d.TaskView):
 
     def __init__(self, category):
@@ -123,6 +127,7 @@ class PluginsTaskView(gui3d.TaskView):
         for module in sorted(gui3d.app.modules):
             if module not in gui3d.app.getSetting('activeUserPlugins'):
                 self.pluginsBox.addWidget(PluginCheckBox(module))
+
 
 class SymmetryAction(gui3d.Action):
     def __init__(self, human, direction):
@@ -158,39 +163,39 @@ class MHApplication(gui3d.Application, mh.Application):
 
         self._default_shortcuts = {
             # Actions
-            'undo':         (mh.Modifiers.CTRL, mh.Keys.z),
-            'redo':         (mh.Modifiers.CTRL, mh.Keys.y),
-            'modelling':    (mh.Modifiers.CTRL, mh.Keys.m),
-            'save':         (mh.Modifiers.CTRL, mh.Keys.s),
-            'load':         (mh.Modifiers.CTRL, mh.Keys.l),
-            'export':       (mh.Modifiers.CTRL, mh.Keys.e),
-            'rendering':    (mh.Modifiers.CTRL, mh.Keys.r),
-            'help':         (mh.Modifiers.CTRL, mh.Keys.h),
-            'exit':         (mh.Modifiers.CTRL, mh.Keys.q),
-            'stereo':       (mh.Modifiers.CTRL, mh.Keys.w),
-            'wireframe':    (mh.Modifiers.CTRL, mh.Keys.f),
-            'qexport':      (mh.Modifiers.ALT, mh.Keys.e),
-            'smooth':       (mh.Modifiers.ALT, mh.Keys.s),
-            'grab':         (mh.Modifiers.ALT, mh.Keys.g),
-            'profiling':    (mh.Modifiers.ALT, mh.Keys.p),
+            'undo': (mh.Modifiers.CTRL, mh.Keys.z),
+            'redo': (mh.Modifiers.CTRL, mh.Keys.y),
+            'modelling': (mh.Modifiers.CTRL, mh.Keys.m),
+            'save': (mh.Modifiers.CTRL, mh.Keys.s),
+            'load': (mh.Modifiers.CTRL, mh.Keys.l),
+            'export': (mh.Modifiers.CTRL, mh.Keys.e),
+            'rendering': (mh.Modifiers.CTRL, mh.Keys.r),
+            'help': (mh.Modifiers.CTRL, mh.Keys.h),
+            'exit': (mh.Modifiers.CTRL, mh.Keys.q),
+            'stereo': (mh.Modifiers.CTRL, mh.Keys.w),
+            'wireframe': (mh.Modifiers.CTRL, mh.Keys.f),
+            'qexport': (mh.Modifiers.ALT, mh.Keys.e),
+            'smooth': (mh.Modifiers.ALT, mh.Keys.s),
+            'grab': (mh.Modifiers.ALT, mh.Keys.g),
+            'profiling': (mh.Modifiers.ALT, mh.Keys.p),
             # Camera navigation
-            'rotateD':      (0, mh.Keys.N2),
-            'rotateL':      (0, mh.Keys.N4),
-            'rotateR':      (0, mh.Keys.N6),
-            'rotateU':      (0, mh.Keys.N8),
-            'panU':         (0, mh.Keys.UP),
-            'panD':         (0, mh.Keys.DOWN),
-            'panR':         (0, mh.Keys.RIGHT),
-            'panL':         (0, mh.Keys.LEFT),
-            'zoomIn':       (0, mh.Keys.PLUS),
-            'zoomOut':      (0, mh.Keys.MINUS),
-            'front':        (0, mh.Keys.N1),
-            'right':        (0, mh.Keys.N3),
-            'top':          (0, mh.Keys.N7),
-            'back':         (mh.Modifiers.CTRL, mh.Keys.N1),
-            'left':         (mh.Modifiers.CTRL, mh.Keys.N3),
-            'bottom':       (mh.Modifiers.CTRL, mh.Keys.N7),
-            'resetCam':     (0, mh.Keys.PERIOD),
+            'rotateD': (0, mh.Keys.N2),
+            'rotateL': (0, mh.Keys.N4),
+            'rotateR': (0, mh.Keys.N6),
+            'rotateU': (0, mh.Keys.N8),
+            'panU': (0, mh.Keys.UP),
+            'panD': (0, mh.Keys.DOWN),
+            'panR': (0, mh.Keys.RIGHT),
+            'panL': (0, mh.Keys.LEFT),
+            'zoomIn': (0, mh.Keys.PLUS),
+            'zoomOut': (0, mh.Keys.MINUS),
+            'front': (0, mh.Keys.N1),
+            'right': (0, mh.Keys.N3),
+            'top': (0, mh.Keys.N7),
+            'back': (mh.Modifiers.CTRL, mh.Keys.N1),
+            'left': (mh.Modifiers.CTRL, mh.Keys.N3),
+            'bottom': (mh.Modifiers.CTRL, mh.Keys.N7),
+            'resetCam': (0, mh.Keys.PERIOD),
             # Version check
             '_versionSentinel': (0, 0x87654321)
         }
@@ -256,11 +261,11 @@ class MHApplication(gui3d.Application, mh.Application):
                 'cameraAutoZoom': False,
                 'lowspeed': 1,
                 'highspeed': 5,
-                'units':'metric',
+                'units': 'metric',
                 'real_weight': False,
-                'invertMouseWheel':False,
-                'language':'english',
-                'excludePlugins':[],
+                'invertMouseWheel': False,
+                'language': 'english',
+                'excludePlugins': [],
                 'activeUserPlugins': [],
                 'rtl': False,
                 'sliderImages': True,
@@ -273,7 +278,7 @@ class MHApplication(gui3d.Application, mh.Application):
                 'tagCount': 5,
                 'makehumanTags': ['makehuman™'],
                 'keepCustomValues': False,
-                '_versionSentinel': 'ADF83BF89112337B261431C15C660D9A' # GM Time was: Sat, Feb 09 2019 23:13:56 +0000
+                '_versionSentinel': 'ADF83BF89112337B261431C15C660D9A'  # GM Time was: Sat, Feb 09 2019 23:13:56 +0000
             }
 
         self._settings = dict(self._default_settings)
@@ -311,10 +316,11 @@ class MHApplication(gui3d.Application, mh.Application):
         def onModified(event):
             self.updateFilenameCaption()
 
-        #self.modelCamera = mh.Camera()
-        #self.modelCamera.switchToOrtho()
+        # self.modelCamera = mh.Camera()
+        # self.modelCamera.switchToOrtho()
         self.modelCamera = mh.OrbitalCamera()
-        #self.modelCamera.debug = True
+
+        # self.modelCamera.debug = True
 
         @self.modelCamera.mhEvent
         def onChanged(event):
@@ -322,10 +328,10 @@ class MHApplication(gui3d.Application, mh.Application):
 
         mh.cameras.append(self.modelCamera)
 
-        #self.guiCamera = mh.Camera()
-        #self.guiCamera._fovAngle = 45
-        #self.guiCamera._eyeZ = 10
-        #self.guiCamera._projection = 0
+        # self.guiCamera = mh.Camera()
+        # self.guiCamera._fovAngle = 45
+        # self.guiCamera._eyeZ = 10
+        # self.guiCamera._projection = 0
 
         # TODO use simpler camera for gui
         self.guiCamera = mh.OrbitalCamera()
@@ -353,7 +359,8 @@ class MHApplication(gui3d.Application, mh.Application):
         if value is None:
             if setting_name in self._undeclared_settings:
                 # Deferred set of setting value
-                log.debug("Assigning setting %s value %s that was loaded before the setting was declared." % (setting_name, self._undeclared_settings[setting_name]))
+                log.debug("Assigning setting %s value %s that was loaded before the setting was declared." % (
+                setting_name, self._undeclared_settings[setting_name]))
                 self._settings[setting_name] = self._undeclared_settings[setting_name]
                 del self._undeclared_settings[setting_name]
             else:
@@ -406,7 +413,8 @@ class MHApplication(gui3d.Application, mh.Application):
     def loadHuman(self):
         # Set a lower than default MAX_FACES value because we know the human has a good topology (will make it a little faster)
         # (we do not lower the global limit because that would limit the selection of meshes that MH would accept too much)
-        self.selectedHuman = self.addObject(human.Human(files3d.loadMesh(mh.getSysDataPath("3dobjs/base.obj"), maxFaces = 5)))
+        self.selectedHuman = self.addObject(
+            human.Human(files3d.loadMesh(mh.getSysDataPath("3dobjs/base.obj"), maxFaces=5)))
 
         # Set the base skeleton
         base_skel = skeleton.load(mh.getSysDataPath('rigs/default.mhskel'), self.selectedHuman.meshData)
@@ -419,58 +427,58 @@ class MHApplication(gui3d.Application, mh.Application):
 
         from scene import Scene
         from getpath import findFile
-        self.setScene( Scene(findFile("scenes/default.mhscene")) )
+        self.setScene(Scene(findFile("scenes/default.mhscene")))
 
     def loadMainGui(self):
         @self.selectedHuman.mhEvent
         def onMouseDown(event):
-          if self.tool:
-            self.selectedGroup = self.getSelectedFaceGroup()
-            self.tool.callEvent("onMouseDown", event)
-          else:
-            self.currentTask.callEvent("onMouseDown", event)
+            if self.tool:
+                self.selectedGroup = self.getSelectedFaceGroup()
+                self.tool.callEvent("onMouseDown", event)
+            else:
+                self.currentTask.callEvent("onMouseDown", event)
 
         @self.selectedHuman.mhEvent
         def onMouseMoved(event):
-          if self.tool:
-            self.tool.callEvent("onMouseMoved", event)
-          else:
-            self.currentTask.callEvent("onMouseMoved", event)
+            if self.tool:
+                self.tool.callEvent("onMouseMoved", event)
+            else:
+                self.currentTask.callEvent("onMouseMoved", event)
 
         @self.selectedHuman.mhEvent
         def onMouseDragged(event):
-          if self.tool:
-            self.tool.callEvent("onMouseDragged", event)
-          else:
-            self.currentTask.callEvent("onMouseDragged", event)
+            if self.tool:
+                self.tool.callEvent("onMouseDragged", event)
+            else:
+                self.currentTask.callEvent("onMouseDragged", event)
 
         @self.selectedHuman.mhEvent
         def onMouseUp(event):
-          if self.tool:
-            self.tool.callEvent("onMouseUp", event)
-          else:
-            self.currentTask.callEvent("onMouseUp", event)
+            if self.tool:
+                self.tool.callEvent("onMouseUp", event)
+            else:
+                self.currentTask.callEvent("onMouseUp", event)
 
         @self.selectedHuman.mhEvent
         def onMouseEntered(event):
-          if self.tool:
-            self.tool.callEvent("onMouseEntered", event)
-          else:
-            self.currentTask.callEvent("onMouseEntered", event)
+            if self.tool:
+                self.tool.callEvent("onMouseEntered", event)
+            else:
+                self.currentTask.callEvent("onMouseEntered", event)
 
         @self.selectedHuman.mhEvent
         def onMouseExited(event):
-          if self.tool:
-            self.tool.callEvent("onMouseExited", event)
-          else:
-            self.currentTask.callEvent("onMouseExited", event)
+            if self.tool:
+                self.tool.callEvent("onMouseExited", event)
+            else:
+                self.currentTask.callEvent("onMouseExited", event)
 
         @self.selectedHuman.mhEvent
         def onMouseWheel(event):
-          if self.tool:
-            self.tool.callEvent("onMouseWheel", event)
-          else:
-            self.currentTask.callEvent("onMouseWheel", event)
+            if self.tool:
+                self.tool.callEvent("onMouseWheel", event)
+            else:
+                self.currentTask.callEvent("onMouseWheel", event)
 
         @self.selectedHuman.mhEvent
         def onChanging(event):
@@ -550,7 +558,8 @@ class MHApplication(gui3d.Application, mh.Application):
                 if os.path.isfile(pLocation):
                     pluginsToLoad.append((file, pLocation))
 
-            elif os.path.isfile(location) and file.endswith('.py') and not file.startswith('_') and os.path.splitext(file)[0] in self.getSetting('activeUserPlugins'):
+            elif os.path.isfile(location) and file.endswith('.py') and not file.startswith('_') and \
+                    os.path.splitext(file)[0] in self.getSetting('activeUserPlugins'):
                 name = os.path.splitext(file)[0]
                 pluginsToLoad.append((name, location))
 
@@ -650,39 +659,39 @@ class MHApplication(gui3d.Application, mh.Application):
         spacing = 1 if self.getSetting('units') == 'metric' else 3.048
 
         # Background grid
-        gridSize = int(200//spacing)
+        gridSize = int(200 // spacing)
         if gridSize % 2 != 0:
             gridSize += 1
         if self.getSetting('units') == 'metric':
             subgrids = 10
         else:
             subgrids = 12
-        backGridMesh = geometry3d.GridMesh(gridSize, gridSize, spacing, offset = -10, plane = 0, subgrids = subgrids)
+        backGridMesh = geometry3d.GridMesh(gridSize, gridSize, spacing, offset=-10, plane=0, subgrids=subgrids)
         backGridMesh.setMainColor(self.gridColor)
         backGridMesh.setSubColor(self.gridSubColor)
         backGridMesh.restrictVisibleToCamera = True
-        backGridMesh.minSubgridZoom = (1.0/spacing) * float(subgrids)/5
+        backGridMesh.minSubgridZoom = (1.0 / spacing) * float(subgrids) / 5
         self.backplaneGrid = gui3d.Object(backGridMesh)
         self.backplaneGrid.excludeFromProduction = True
         self.backplaneGrid.placeAtFeet = True
         self.backplaneGrid.lockRotation = True
         self.backplaneGrid.setShadeless(1)
-        #self.backplaneGrid.setPosition([0,offset,0])
+        # self.backplaneGrid.setPosition([0,offset,0])
         self.addObject(self.backplaneGrid)
 
         # Ground grid
-        gridSize = int(20//spacing)
+        gridSize = int(20 // spacing)
         if gridSize % 2 != 0:
             gridSize += 1
-        groundGridMesh = geometry3d.GridMesh(gridSize, gridSize, spacing, offset = 0, plane = 1, subgrids = subgrids)
+        groundGridMesh = geometry3d.GridMesh(gridSize, gridSize, spacing, offset=0, plane=1, subgrids=subgrids)
         groundGridMesh.setMainColor(self.gridColor)
         groundGridMesh.setSubColor(self.gridSubColor)
-        groundGridMesh.minSubgridZoom = (1.0/spacing) * float(subgrids)/5
+        groundGridMesh.minSubgridZoom = (1.0 / spacing) * float(subgrids) / 5
         self.groundplaneGrid = gui3d.Object(groundGridMesh)
         self.groundplaneGrid.excludeFromProduction = True
         self.groundplaneGrid.placeAtFeet = True
         self.groundplaneGrid.setShadeless(1)
-        #self.groundplaneGrid.setPosition([0,offset,0])
+        # self.groundplaneGrid.setPosition([0,offset,0])
         groundGridMesh.restrictVisibleAboveGround = True
         self.addObject(self.groundplaneGrid)
 
@@ -696,7 +705,7 @@ class MHApplication(gui3d.Application, mh.Application):
 
         mesh = geometry3d.RectangleMesh(10, 10, centered=True)
 
-        mesh.setColors(self.bgBottomLeftColor, self.bgBottomRightColor, 
+        mesh.setColors(self.bgBottomLeftColor, self.bgBottomRightColor,
                        self.bgTopRightColor, self.bgTopLeftColor)
 
         self.backgroundGradient = gui3d.Object(mesh)
@@ -718,17 +727,17 @@ class MHApplication(gui3d.Application, mh.Application):
             return
 
         cam = self.backgroundGradient.mesh.getCamera()
-        #minX,minY,_ = cam.convertToWorld2D(0,0)
-        #maxX,maxY,_ = cam.convertToWorld2D(width, height)
-        #self.backgroundGradient.mesh.resize(abs(maxX - minX), abs(maxY - minY))
+        # minX,minY,_ = cam.convertToWorld2D(0,0)
+        # maxX,maxY,_ = cam.convertToWorld2D(width, height)
+        # self.backgroundGradient.mesh.resize(abs(maxX - minX), abs(maxY - minY))
 
         # TODO hack for orbital camera, properly clean this up some day
         height = cam.getScale()
         aspect = cam.getAspect()
         width = height * aspect
-        self.backgroundGradient.mesh.resize(2.1*width, 2.1*height)
+        self.backgroundGradient.mesh.resize(2.1 * width, 2.1 * height)
 
-        self.backgroundGradient.setPosition([0, 0, -0.85*cam.farPlane])
+        self.backgroundGradient.setPosition([0, 0, -0.85 * cam.farPlane])
 
     def loadMacroTargets(self):
         """
@@ -736,9 +745,9 @@ class MHApplication(gui3d.Application, mh.Application):
         groups.
         """
         import targets
-        #import getpath
+        # import getpath
         for target in targets.getTargets().findTargets('macrodetails'):
-            #log.debug('Preloading target %s', getpath.getRelativePath(target.path))
+            # log.debug('Preloading target %s', getpath.getRelativePath(target.path))
             algos3d.getTarget(self.selectedHuman.meshData, target.path)
 
     def loadFinish(self):
@@ -747,24 +756,24 @@ class MHApplication(gui3d.Application, mh.Application):
 
         self.currentFile.modified = False
 
-        #printtree(self)
+        # printtree(self)
 
         mh.changeCategory("Modelling")
 
         self.redraw()
 
     def startupSequence(self):
-        self._processCommandlineArgs(beforeLoaded = True)
+        self._processCommandlineArgs(beforeLoaded=True)
 
         mainwinGeometry = self.mainwin.storeGeometry()
         mainwinBorder = (self.mainwin.frameGeometry().width() - self.mainwin.width(),
-             self.mainwin.frameGeometry().height() - self.mainwin.height())
+                         self.mainwin.frameGeometry().height() - self.mainwin.height())
 
         # Move main window completely behind splash screen
         self.mainwin.resize(self.splash.width() - mainwinBorder[0], self.splash.height() - mainwinBorder[1])
         self.mainwin.move(self.splash.pos())
 
-        #self.splash.setFormat('<br><br><b><font size="10" color="#ffffff">%s</font></b>')
+        # self.splash.setFormat('<br><br><b><font size="10" color="#ffffff">%s</font></b>')
 
         progress = Progress([36, 6, 15, 333, 40, 154, 257, 5], messaging=True)
 
@@ -791,17 +800,17 @@ class MHApplication(gui3d.Application, mh.Application):
 
         progress.step('Applying targets')
         self.loadFinish()
-        
+
         progress.step('Loading macro targets')
         if self.getSetting('preloadTargets'):
             self.loadMacroTargets()
 
         progress.step('Loading done')
 
-        log.message('') # Empty status indicator
+        log.message('')  # Empty status indicator
 
         if sys.platform.startswith("darwin"):
-            self.splash.resize(0,0) # work-around for mac splash-screen closing bug
+            self.splash.resize(0, 0)  # work-around for mac splash-screen closing bug
 
         self.mainwin.show()
         self.splash.hide()
@@ -810,8 +819,10 @@ class MHApplication(gui3d.Application, mh.Application):
         self.splash = None
 
         if not self.args.get('noshaders', False) and \
-          ( not mh.Shader.supported() or mh.Shader.glslVersion() < (1,20) ):
-            self.prompt('Warning', 'Your system does not support OpenGL shaders (GLSL v1.20 required).\nOnly simple shading will be available.', 'Ok', None, None, None, 'glslWarning')
+                (not mh.Shader.supported() or mh.Shader.glslVersion() < (1, 20)):
+            self.prompt('Warning',
+                        'Your system does not support OpenGL shaders (GLSL v1.20 required).\nOnly simple shading will be available.',
+                        'Ok', None, None, None, 'glslWarning')
 
         # Restore main window size and position
         geometry = self.getSetting('windowGeometry')
@@ -820,24 +831,25 @@ class MHApplication(gui3d.Application, mh.Application):
         else:
             self.mainwin.restoreGeometry(mainwinGeometry)
 
-        self._processCommandlineArgs(beforeLoaded = False)
+        self._processCommandlineArgs(beforeLoaded=False)
 
     def _processCommandlineArgs(self, beforeLoaded):
         if beforeLoaded:
             if self.args.get('noshaders', False):
                 log.message("Force shaders disabled")
 
-        else: # After application is loaded
+        else:  # After application is loaded
             if self.args.get('mhmFile', None):
                 import getpath
-                mhmFile = getpath.pathToUnicode( self.args.get('mhmFile') )
+                mhmFile = getpath.pathToUnicode(self.args.get('mhmFile'))
                 log.message("Loading MHM file %s (as specified by commandline argument)", mhmFile)
                 if not os.path.isfile(mhmFile):
                     mhmFile = getpath.findFile(mhmFile, mh.getPath("models"))
                 if os.path.isfile(mhmFile):
                     self.loadHumanMHM(mhmFile)
                 else:
-                    log.error("Failed to load MHM file. The MHM file specified as argument (%s) does not exist!", mhmFile)
+                    log.error("Failed to load MHM file. The MHM file specified as argument (%s) does not exist!",
+                              mhmFile)
             if self.args.get('runtests', False):
                 log.message("Running test suite")
                 import testsuite
@@ -963,8 +975,9 @@ class MHApplication(gui3d.Application, mh.Application):
                     # Store the values of (yet) undeclared settings and defer until plugins are loaded
                     self._undeclared_settings[setting_name] = value
         else:
-            log.warning("Incompatible MakeHuman settings (version %s) detected (expected %s). Loading default settings." % (settings.get('version','undefined'), mh.getVersionDigitsStr()))
-
+            log.warning(
+                "Incompatible MakeHuman settings (version %s) detected (expected %s). Loading default settings." % (
+                settings.get('version', 'undefined'), mh.getVersionDigitsStr()))
 
         if 'language' in self.settings:
             self.setLanguage(self.settings['language'])
@@ -1006,7 +1019,7 @@ class MHApplication(gui3d.Application, mh.Application):
 
             with outFile("settings.ini") as f:
                 settings = self.settings
-                settings['version'] = mh.getVersionDigitsStr() 
+                settings['version'] = mh.getVersionDigitsStr()
                 f.write(mh.formatINI(settings))
 
             with outFile("shortcuts.ini") as f:
@@ -1031,7 +1044,7 @@ class MHApplication(gui3d.Application, mh.Application):
     # Themes
     def setTheme(self, theme):
         # Disabling this check allows faster testing of a skin by reloading it.
-        #if self.theme == theme:
+        # if self.theme == theme:
         #    return
 
         # Set defaults
@@ -1086,15 +1099,15 @@ class MHApplication(gui3d.Application, mh.Application):
             self.backplaneGrid.mesh.setMainColor(self.gridColor)
             self.backplaneGrid.mesh.setSubColor(self.gridSubColor)
         if self.backgroundGradient:
-            self.backgroundGradient.mesh.setColors(self.bgBottomLeftColor, 
-                                                   self.bgBottomRightColor, 
-                                                   self.bgTopRightColor, 
+            self.backgroundGradient.mesh.setColors(self.bgBottomLeftColor,
+                                                   self.bgBottomRightColor,
+                                                   self.bgTopRightColor,
                                                    self.bgTopLeftColor)
         mh.setClearColor(self.clearColor[0], self.clearColor[1], self.clearColor[2], 1.0)
 
         if update_log:
             self.log_window.updateView()
-        log.debug("Loaded theme %s", mh.getSysDataPath('themes/'+theme+'.mht'))
+        log.debug("Loaded theme %s", mh.getSysDataPath('themes/' + theme + '.mht'))
 
         try:
             f = io.open(mh.getSysDataPath('themes/%s.qss' % theme), 'r', encoding='utf-8')
@@ -1104,7 +1117,7 @@ class MHApplication(gui3d.Application, mh.Application):
             for widget in self.allWidgets():
                 if isinstance(widget, gui.Slider):
                     widget.setStyleSheet(qStyle)
-            log.debug("Loaded Qt style %s", mh.getSysDataPath('themes/'+theme+'.qss'))
+            log.debug("Loaded Qt style %s", mh.getSysDataPath('themes/' + theme + '.qss'))
         except:
             self.setStyleSheet("")
             # Also set stylesheet on custom slider style
@@ -1127,7 +1140,7 @@ class MHApplication(gui3d.Application, mh.Application):
             action.setIcon(gui.Action.getIcon(action.name))
 
     def getLookAndFeelStyles(self):
-        return [ str(style) for style in gui.QtGui.QStyleFactory.keys() ]
+        return [str(style) for style in gui.QtGui.QStyleFactory.keys()]
 
     def setLookAndFeel(self, platform):
         style = gui.QtGui.QStyleFactory.create(platform)
@@ -1158,7 +1171,7 @@ class MHApplication(gui3d.Application, mh.Application):
         return language.getLanguages()
 
     def getLanguageString(self, string, appendData=None, appendFormat=None):
-        return language.language.getLanguageString(string,appendData,appendFormat)
+        return language.language.getLanguageString(string, appendData, appendFormat)
 
     def dumpMissingStrings(self):
         language.language.dumpMissingStrings()
@@ -1220,7 +1233,8 @@ class MHApplication(gui3d.Application, mh.Application):
         self.mainwin.canvas.blockRedraw = False
 
     # Global dialog
-    def prompt(self, title, text, button1Label, button2Label=None, button1Action=None, button2Action=None, helpId=None, fmtArgs = None):
+    def prompt(self, title, text, button1Label, button2Label=None, button1Action=None, button2Action=None, helpId=None,
+               fmtArgs=None):
         if fmtArgs is None:
             fmtArgs = []
         elif isinstance(fmtArgs, str):
@@ -1228,17 +1242,21 @@ class MHApplication(gui3d.Application, mh.Application):
         if self.dialog is None:
             self.dialog = gui.Dialog(self.mainwin)
             self.dialog.helpIds.update(self.helpIds)
-        return self.dialog.prompt(title, text, button1Label, button2Label, button1Action, button2Action, helpId, fmtArgs)
+        return self.dialog.prompt(title, text, button1Label, button2Label, button1Action, button2Action, helpId,
+                                  fmtArgs)
 
     def about(self):
         """
         Show about dialog
         """
-        #gui.QtGui.QMessageBox.about(self.mainwin, 'About MakeHuman', mh.getCopyrightMessage())
-        #aboutbox = gui.AboutBox(self.mainwin, 'About MakeHuman', mh.getCopyrightMessage())
-        abouttext = '<h1>MakeHuman license</h1>' + mh.getCopyrightMessage() + "\n" + mh.getCredits(richtext=True) + "\n\n" + mh.getSoftwareLicense(richtext=True) + "\n\n\n" + mh.getThirdPartyLicenses(richtext=True)
+        # gui.QtGui.QMessageBox.about(self.mainwin, 'About MakeHuman', mh.getCopyrightMessage())
+        # aboutbox = gui.AboutBox(self.mainwin, 'About MakeHuman', mh.getCopyrightMessage())
+        abouttext = '<h1>MakeHuman license</h1>' + mh.getCopyrightMessage() + "\n" + mh.getCredits(
+            richtext=True) + "\n\n" + mh.getSoftwareLicense(richtext=True) + "\n\n\n" + mh.getThirdPartyLicenses(
+            richtext=True)
 
-        aboutbox = gui.AboutBoxScrollbars(self.mainwin, 'About MakeHuman', abouttext, "MakeHuman v"+mh.getVersionStr(verbose=False, full=True))
+        aboutbox = gui.AboutBoxScrollbars(self.mainwin, 'About MakeHuman', abouttext,
+                                          "MakeHuman v" + mh.getVersionStr(verbose=False, full=True))
         aboutbox.show()
         aboutbox.exec_()
 
@@ -1252,7 +1270,7 @@ class MHApplication(gui3d.Application, mh.Application):
         tl.append(animation3d.UpdateAction(self))
         tl.start()
 
-    def setTargetCamera(self, vIdx, zoomFactor = 1.0, animate = True):
+    def setTargetCamera(self, vIdx, zoomFactor=1.0, animate=True):
         if isinstance(vIdx, (tuple, list)):
             return
         human = self.selectedHuman
@@ -1399,7 +1417,7 @@ class MHApplication(gui3d.Application, mh.Application):
 
         self.mouseActions[mouseAction] = method
 
-        #for mouseAction, m in self.mouseActions.iteritems():
+        # for mouseAction, m in self.mouseActions.iteritems():
         #    print (mouseAction, m)
 
         return True
@@ -1425,7 +1443,7 @@ class MHApplication(gui3d.Application, mh.Application):
 
     # Save handlers
 
-    def addSaveHandler(self, handler, priority = None):
+    def addSaveHandler(self, handler, priority=None):
         """
         Register a handler to trigger when a save action happens, when called
         the handler gets the chance to write property lines to the MHM file.
@@ -1487,17 +1505,17 @@ class MHApplication(gui3d.Application, mh.Application):
 
     def toggleGrid(self):
         if self.backplaneGrid and self.groundplaneGrid:
-            self.backplaneGrid.setVisibility( self.actions.grid.isChecked() )
-            self.groundplaneGrid.setVisibility( self.actions.grid.isChecked() )
+            self.backplaneGrid.setVisibility(self.actions.grid.isChecked())
+            self.groundplaneGrid.setVisibility(self.actions.grid.isChecked())
             self.redraw()
 
     def symmetryRight(self):
         human = self.selectedHuman
-        self.do( SymmetryAction(human, 'r') )
+        self.do(SymmetryAction(human, 'r'))
 
     def symmetryLeft(self):
         human = self.selectedHuman
-        self.do( SymmetryAction(human, 'l') )
+        self.do(SymmetryAction(human, 'l'))
 
     def symmetry(self):
         human = self.selectedHuman
@@ -1515,7 +1533,8 @@ class MHApplication(gui3d.Application, mh.Application):
 
     def resetHuman(self):
         if self.currentFile.modified:
-            self.prompt('Reset', 'By resetting the human you will lose all your changes, are you sure?', 'Yes', 'No', self._resetHuman)
+            self.prompt('Reset', 'By resetting the human you will lose all your changes, are you sure?', 'Yes', 'No',
+                        self._resetHuman)
         else:
             self._resetHuman()
 
@@ -1610,7 +1629,7 @@ class MHApplication(gui3d.Application, mh.Application):
         animation3d.animate(self, 0.20, [
             self.rotateAction([0.0, 0.0, 0.0]),
             animation3d.PathAction(self.modelCamera, [self.modelCamera.getPosition(), [0.0, 0.0, 0.0]]),
-            animation3d.ZoomAction(self.modelCamera, self.modelCamera.zoomFactor, 1.0) ])
+            animation3d.ZoomAction(self.modelCamera, self.modelCamera.zoomFactor, 1.0)])
 
     # Mouse actions
     def mouseTranslate(self, event):
@@ -1634,14 +1653,15 @@ class MHApplication(gui3d.Application, mh.Application):
         if self.getSetting('invertMouseWheel'):
             speed *= -1
 
-        self.modelCamera.addZoom( -0.05 * event.dy * speed )
+        self.modelCamera.addZoom(-0.05 * event.dy * speed)
 
     def mouseFocus(self, ev):
         pass
 
     def promptAndExit(self):
         if self.currentFile.modified:
-            self.prompt('Exit', 'You have unsaved changes. Are you sure you want to exit the application?', 'Yes', 'No', self.stop)
+            self.prompt('Exit', 'You have unsaved changes. Are you sure you want to exit the application?', 'Yes', 'No',
+                        self.stop)
         else:
             self.stop()
 
@@ -1668,78 +1688,72 @@ class MHApplication(gui3d.Application, mh.Application):
                 toolbar.addAction(action)
             return action
 
-
         # Global actions (eg. keyboard shortcuts)
         toolbar = None
 
-        self.actions.rendering = action('rendering', self.getLanguageString('Rendering'),     self.goToRendering)
-        self.actions.modelling = action('modelling', self.getLanguageString('Modelling'),     self.goToModelling)
-        self.actions.exit      = action('exit'     , self.getLanguageString('Exit'),          self.promptAndExit)
+        self.actions.rendering = action('rendering', self.getLanguageString('Rendering'), self.goToRendering)
+        self.actions.modelling = action('modelling', self.getLanguageString('Modelling'), self.goToModelling)
+        self.actions.exit = action('exit', self.getLanguageString('Exit'), self.promptAndExit)
 
-        self.actions.rotateU   = action('rotateU',   self.getLanguageString('Rotate Up'),     self.rotateUp)
-        self.actions.rotateD   = action('rotateD',   self.getLanguageString('Rotate Down'),   self.rotateDown)
-        self.actions.rotateR   = action('rotateR',   self.getLanguageString('Rotate Right'),  self.rotateRight)
-        self.actions.rotateL   = action('rotateL',   self.getLanguageString('Rotate Left'),   self.rotateLeft)
-        self.actions.panU      = action('panU',      self.getLanguageString('Pan Up'),        self.panUp)
-        self.actions.panD      = action('panD',      self.getLanguageString('Pan Down'),      self.panDown)
-        self.actions.panR      = action('panR',      self.getLanguageString('Pan Right'),     self.panRight)
-        self.actions.panL      = action('panL',      self.getLanguageString('Pan Left'),      self.panLeft)
-        self.actions.zoomIn    = action('zoomIn',    self.getLanguageString('Zoom In'),       self.zoomIn)
-        self.actions.zoomOut   = action('zoomOut',   self.getLanguageString('Zoom Out'),      self.zoomOut)
+        self.actions.rotateU = action('rotateU', self.getLanguageString('Rotate Up'), self.rotateUp)
+        self.actions.rotateD = action('rotateD', self.getLanguageString('Rotate Down'), self.rotateDown)
+        self.actions.rotateR = action('rotateR', self.getLanguageString('Rotate Right'), self.rotateRight)
+        self.actions.rotateL = action('rotateL', self.getLanguageString('Rotate Left'), self.rotateLeft)
+        self.actions.panU = action('panU', self.getLanguageString('Pan Up'), self.panUp)
+        self.actions.panD = action('panD', self.getLanguageString('Pan Down'), self.panDown)
+        self.actions.panR = action('panR', self.getLanguageString('Pan Right'), self.panRight)
+        self.actions.panL = action('panL', self.getLanguageString('Pan Left'), self.panLeft)
+        self.actions.zoomIn = action('zoomIn', self.getLanguageString('Zoom In'), self.zoomIn)
+        self.actions.zoomOut = action('zoomOut', self.getLanguageString('Zoom Out'), self.zoomOut)
 
-        self.actions.profiling = action('profiling', self.getLanguageString('Profiling'),     self.toggleProfiling, toggle=True)
+        self.actions.profiling = action('profiling', self.getLanguageString('Profiling'), self.toggleProfiling,
+                                        toggle=True)
 
         # 1 - File toolbar
         toolbar = self.file_toolbar = mh.addToolBar("File")
 
-        self.actions.load      = action('load',      self.getLanguageString('Load'),          self.goToLoad)
-        self.actions.save      = action('save',      self.getLanguageString('Save'),          self.doSave)
-        self.actions.export    = action('export',    self.getLanguageString('Export'),        self.goToExport)
-
+        self.actions.load = action('load', self.getLanguageString('Load'), self.goToLoad)
+        self.actions.save = action('save', self.getLanguageString('Save'), self.doSave)
+        self.actions.export = action('export', self.getLanguageString('Export'), self.goToExport)
 
         # 2 - Edit toolbar
         toolbar = self.edit_toolbar = mh.addToolBar("Edit")
 
-        self.actions.undo      = action('undo',      self.getLanguageString('Undo'),          self.undo)
-        self.actions.redo      = action('redo',      self.getLanguageString('Redo'),          self.redo)
-        self.actions.reset     = action('reset',     self.getLanguageString('Reset'),         self.resetHuman)
-
+        self.actions.undo = action('undo', self.getLanguageString('Undo'), self.undo)
+        self.actions.redo = action('redo', self.getLanguageString('Redo'), self.redo)
+        self.actions.reset = action('reset', self.getLanguageString('Reset'), self.resetHuman)
 
         # 3 - View toolbar
         toolbar = self.view_toolbar = mh.addToolBar("View")
 
-        self.actions.smooth    = action('smooth',    self.getLanguageString('Smooth'),        self.toggleSubdivision, toggle=True)
-        self.actions.wireframe = action('wireframe', self.getLanguageString('Wireframe'),     self.toggleSolid, toggle=True)
-        self.actions.pose      = action('pose', self.getLanguageString('Pose'),               self.togglePose,  toggle=True)
-        self.actions.grid      = action('grid', self.getLanguageString('Grid'),               self.toggleGrid,  toggle=True)
-
+        self.actions.smooth = action('smooth', self.getLanguageString('Smooth'), self.toggleSubdivision, toggle=True)
+        self.actions.wireframe = action('wireframe', self.getLanguageString('Wireframe'), self.toggleSolid, toggle=True)
+        self.actions.pose = action('pose', self.getLanguageString('Pose'), self.togglePose, toggle=True)
+        self.actions.grid = action('grid', self.getLanguageString('Grid'), self.toggleGrid, toggle=True)
 
         # 4 - Symmetry toolbar
         toolbar = self.sym_toolbar = mh.addToolBar("Symmetry")
 
-        self.actions.symmetryR = action('symm1', self.getLanguageString('Symmetry R>L'),     self.symmetryLeft)
-        self.actions.symmetryL = action('symm2', self.getLanguageString('Symmetry L>R'),     self.symmetryRight)
-        self.actions.symmetry  = action('symm',  self.getLanguageString('Symmetry'),         self.symmetry, toggle=True)
-
+        self.actions.symmetryR = action('symm1', self.getLanguageString('Symmetry R>L'), self.symmetryLeft)
+        self.actions.symmetryL = action('symm2', self.getLanguageString('Symmetry L>R'), self.symmetryRight)
+        self.actions.symmetry = action('symm', self.getLanguageString('Symmetry'), self.symmetry, toggle=True)
 
         # 5 - Camera toolbar
         toolbar = self.camera_toolbar = mh.addToolBar("Camera")
 
-        self.actions.front     = action('front',     self.getLanguageString('Front view'),    self.frontView)
-        self.actions.back      = action('back',      self.getLanguageString('Back view'),     self.backView)
-        self.actions.right     = action('right',     self.getLanguageString('Right view'),    self.rightView)
-        self.actions.left      = action('left',      self.getLanguageString('Left view'),     self.leftView)
-        self.actions.top       = action('top',       self.getLanguageString('Top view'),      self.topView)
-        self.actions.bottom    = action('bottom',    self.getLanguageString('Bottom view'),   self.bottomView)
-        self.actions.resetCam  = action('resetCam',  self.getLanguageString('Reset camera'),  self.resetView)
-
+        self.actions.front = action('front', self.getLanguageString('Front view'), self.frontView)
+        self.actions.back = action('back', self.getLanguageString('Back view'), self.backView)
+        self.actions.right = action('right', self.getLanguageString('Right view'), self.rightView)
+        self.actions.left = action('left', self.getLanguageString('Left view'), self.leftView)
+        self.actions.top = action('top', self.getLanguageString('Top view'), self.topView)
+        self.actions.bottom = action('bottom', self.getLanguageString('Bottom view'), self.bottomView)
+        self.actions.resetCam = action('resetCam', self.getLanguageString('Reset camera'), self.resetView)
 
         # 6 - Other toolbar
         toolbar = self.other_toolbar = mh.addToolBar("Other")
 
-        self.actions.grab      = action('grab',      self.getLanguageString('Grab screen'),   self.grabScreen)
-        self.actions.help      = action('help',      self.getLanguageString('Help'),          self.goToHelp)
-
+        self.actions.grab = action('grab', self.getLanguageString('Grab screen'), self.grabScreen)
+        self.actions.help = action('help', self.getLanguageString('Help'), self.goToHelp)
 
     def createShortcuts(self):
         for action, (modifier, key) in self.shortcuts.items():
@@ -1750,7 +1764,7 @@ class MHApplication(gui3d.Application, mh.Application):
     def OnInit(self):
         mh.Application.OnInit(self)
 
-        #[BAL 07/14/2013] work around focus bug in PyQt on OS X
+        # [BAL 07/14/2013] work around focus bug in PyQt on OS X
         if sys.platform.startswith('darwin'):
             G.app.mainwin.raise_()
 

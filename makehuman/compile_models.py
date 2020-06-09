@@ -43,7 +43,7 @@ import os
 import fnmatch
 import module3d
 import files3d
-from getpath import isSubPath
+
 
 def getAllFiles(rootPath, filterStrArr):
     result = [ None ]*len(filterStrArr)
